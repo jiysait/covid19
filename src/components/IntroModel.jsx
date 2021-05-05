@@ -1,3 +1,6 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useRef, Suspense } from 'react'
 import { Canvas, useFrame, useThree, extend } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -7,8 +10,17 @@ import DNA from './Dna'
 
 extend({ OrbitControls })
 
+
+/**
+ * 
+ * @returns 
+ */
 export default function IntroModel() {
 
+    /**
+     * 
+     * @returns 
+     */
     const CameraControls = () => {
 
         const controls = useRef()
@@ -33,14 +45,14 @@ export default function IntroModel() {
 
     }
 
+    /**
+     * 
+     */
     return (
-        // <Canvas linear={true} flat={false} gl={{ alpha: false, antialias: false }} camera={{ position: [-3, 3, -1], fov: 35 }}>
         <Canvas camera={{ position: [-3, 3, -1], fov: 35 }}>
             <CameraControls />
             <ambientLight intensity={.3} />
             <directionalLight position={[10, 10, 15]} intensity={1} />
-            {/* <pointLight position={[10, 10, 15]} intensity={1} /> */}
-            {/* <World position={[0, 0, 0]} /> */}
             <Suspense fallback={null}>
                 <DNA position={[0, 0, 0]} />
             </Suspense>

@@ -1,11 +1,21 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useEffect, useRef } from "react"
 import IntroModel from "./IntroModel"
 
 
+/**
+ * 
+ * @returns 
+ */
 export default function Header() {
 
     const arrow = useRef()
 
+    /**
+     * 
+     */
     useEffect(() => {
         arrow.current.animate([
             {left: '0'},
@@ -17,6 +27,9 @@ export default function Header() {
           })
     })
 
+    /**
+     * 
+     */
     return (
         <section id="jiy-header-hero" className="hero is-link is-fullheight is-fullheight-with-navbar is-flex is-flex-direction-row">
             <div className="hero-body">

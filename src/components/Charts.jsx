@@ -1,9 +1,21 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { lazy, Suspense } from "react"
 import CovidChart from "./CovidChart"
 
 const CovidTable = lazy(() => import('./CovidTable'))
 
+
+/**
+ * 
+ * @returns 
+ */
 export default function Charts() {
+
+  /**
+   * 
+   */
   return (
     <>
       <section className="section">
@@ -49,4 +61,5 @@ export default function Charts() {
       </section>
     </>
   )
+
 }

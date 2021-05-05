@@ -30,7 +30,16 @@ button:focus:not {
     transform: translate(-50%,-50%);
     width: 80px;
     height: 60px;
-    cursor: pointer;
+    cursor: none;
+}
+.jiy-icon-chart {
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    transform: translate(-50%,-50%);
+    width: 80px;
+    height: 60px;
+    cursor: none;
 }
 .jiy-arrow-right {
     position: absolute;
@@ -56,6 +65,32 @@ button:focus:not {
 .jiy-arrow-right::before {
     top: 12px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+    transform: rotate(-45deg);
+}
+.jiy-arrow-right-dark {
+    position: absolute;
+    top: -45px;
+    width: 90%;
+    height: 10px;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 0 3px 5px rgba(128, 128, 128, 0.2);
+    animation: arrow 700ms linear infinite;
+}
+.jiy-arrow-right-dark::before, .jiy-arrow-right-dark::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 10px;
+    right: -8px;
+    background-color: rgb(0, 0, 0);
+}
+.jiy-arrow-right-dark::after {
+    top: -12px;
+    transform: rotate(45deg);
+}
+.jiy-arrow-right-dark::before {
+    top: 12px;
+    box-shadow: 0 3px 5px rgba(128, 128, 128, 0.2);
     transform: rotate(-45deg);
 }
 

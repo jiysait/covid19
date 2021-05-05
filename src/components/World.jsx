@@ -1,3 +1,6 @@
+/**
+ * Author: Jongil Yoon
+ */
 // import { useThree } from '@react-three/fiber'
 // import { TextureLoader } from 'three'
 
@@ -10,6 +13,10 @@
 // import world from '../media/world.jpg'
 
 
+/**
+ * 
+ * @returns 
+ */
 export default function World() {
 
     // const { scene } = useThree()

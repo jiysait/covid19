@@ -1,14 +1,28 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useState } from "react"
 
+
+/**
+ * 
+ */
 export default function Navbar() {
 
     const [isActive, setActive] = useState(false)
 
+    /**
+     * 
+     * @param {*} e 
+     */
     const handleHamburger = e => {
         e.preventDefault()
         setActive(!isActive)
     }
 
+    /**
+     * 
+     */
     return (
         <nav className="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">

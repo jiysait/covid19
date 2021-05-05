@@ -1,6 +1,19 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React from 'react'
 
+
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export default function CovidRecord({ data }) {
+
+    /**
+     * 
+     */
     return (
         <tr>
             <th>{data.pruid}</th>
@@ -45,4 +58,5 @@ export default function CovidRecord({ data }) {
             <th>{data.avgtests_last7}</th>
         </tr>
     )
+
 }

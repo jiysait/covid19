@@ -1,7 +1,15 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useEffect, useRef } from 'react'
 import { select, scaleUtc, scaleLinear, max, line, extent, curveStep, axisLeft, axisBottom } from "d3"
 
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export default function LineChart({ currentStateData }) {
 
     const chart = useRef();
@@ -10,6 +18,10 @@ export default function LineChart({ currentStateData }) {
     const height = 350
     const margin = ({ top: 0, right: 0, bottom: 0, left: 0 })
 
+    /**
+     * 
+     * @returns 
+     */
     const setMountPoint = () => (
         // () will return following HTML node
         select(chart.current)
@@ -18,6 +30,9 @@ export default function LineChart({ currentStateData }) {
             .style('overflow', 'visible')
     )
 
+    /**
+     * 
+     */
     const drawChart = svg => {
 
         removeChart(svg)
@@ -37,6 +52,9 @@ export default function LineChart({ currentStateData }) {
 
     }
 
+    /**
+     * 
+     */
     const xAxis = g => (
         g.attr("transform", `translate(0,${height - margin.bottom})`)
             .call(axisBottom(x).ticks(width / 70).tickSizeOuter(0))
@@ -44,6 +62,11 @@ export default function LineChart({ currentStateData }) {
             .attr("font-weight", "bolder")
     )
 
+    /**
+     * 
+     * @param {*} g 
+     * @returns 
+     */
     const yAxis = g => (
         g.attr("transform", `translate(${margin.left},0)`)
             .call(axisLeft(y))
@@ -56,25 +79,41 @@ export default function LineChart({ currentStateData }) {
                 .text(currentStateData.y))
     )
 
+    /**
+     * 
+     */
     const x = scaleUtc()
         .domain(extent(currentStateData, d => d.date))
         .range([margin.left, width - margin.right])
 
+    /**
+     * 
+     */
     const y = scaleLinear()
         .domain([0, max(currentStateData, d => d.value)]).nice()
         .range([height - margin.bottom, margin.top])
 
+    /**
+     * 
+     */
     const getLine = line()
         .curve(curveStep)
         .defined(d => !isNaN(d.value))
         .x(d => x(d.date))
         .y(d => y(d.value))
 
+    /**
+     * 
+     * @param {*} svg 
+     */
     const removeChart = svg => {
         svg.selectAll('g').remove()
         svg.selectAll('path').remove()
     }
 
+    /**
+     * 
+     */
     useEffect(() => {
         if (currentStateData !== null && currentStateData !== undefined && currentStateData !== '') {
             drawChart(setMountPoint())
@@ -83,6 +122,9 @@ export default function LineChart({ currentStateData }) {
         }
     }, [currentStateData])
 
+    /**
+     * 
+     */
     return (
         <svg ref={chart} />
     )

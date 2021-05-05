@@ -1,3 +1,6 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { select, geoAlbers, geoPath } from "d3"
 import LineChart from './LineChart'
@@ -5,12 +8,16 @@ import LineChart from './LineChart'
 import { StoreContext } from "./Main"
 
 
+/**
+ * 
+ */
 export default function CovidChart() {
 
     const { geoData } = useContext(StoreContext)
     const { covidData } = useContext(StoreContext)
 
     const chart = useRef()
+    const arrow = useRef()
 
     const [currentStateData, setCurrentStateData] = useState()
 
@@ -18,6 +25,23 @@ export default function CovidChart() {
     const height = 500
     const margin = ({ top: 20, right: 30, bottom: 150, left: 40 })
 
+    /**
+     * 
+     */
+    const animateArrow = () => {
+        arrow.current.animate([
+            { right: '0' },
+            { right: '10px' },
+            { right: '0' }
+        ], {
+            duration: 700,
+            iterations: Infinity
+        })
+    }
+
+    /**
+     * 
+     */
     const setMountPoint = () => (
         // () will return following HTML node
         select(chart.current)
@@ -26,6 +50,9 @@ export default function CovidChart() {
             .style('overflow', 'visible')
     )
 
+    /**
+     * 
+     */
     const drawTopo = svg => {
 
         const data = joinData()
@@ -47,7 +74,6 @@ export default function CovidChart() {
             .attr('fill', d => getColorWeight(d.total))
             .attr('stroke', ' #34495e')
             .on('mouseover', handleMouseEnter)
-            .on('mouseout', handleMouseLeave)
 
         const label = state.append('g')
             .attr('id', d => 'jiy-svg-meta-' + d.pruid)
@@ -262,6 +288,9 @@ export default function CovidChart() {
         }
     }
 
+    /**
+     * 
+     */
     const handleMouseEnter = e => {
         const id = e.target.id.split('-')[3]
         switch (id) {
@@ -483,18 +512,22 @@ export default function CovidChart() {
 
     }
 
-    const handleMouseLeave = e => {
-    }
-
+    /**
+     * 
+     */
     useEffect(() => {
         if (
             geoData !== null && geoData !== undefined && geoData.length !== 0 &&
             covidData !== null && covidData !== undefined && covidData !== ''
         ) {
             drawTopo(setMountPoint())
+            animateArrow()
         }
     }, [geoData, covidData])
 
+    /**
+     * 
+     */
     return (
         <div className="tile is-ancestor">
             <div className="tile is-parent is-9">
@@ -502,8 +535,12 @@ export default function CovidChart() {
                     <svg ref={chart} />
                 </div>
             </div>
-            <div className="tile is-parent">
+            <div className="tile is-parent is-vertical">
                 <div className="is-child">
+                    <div className="jiy-icon-chart">
+                        Mouse over
+                        <span ref={arrow} className="jiy-arrow-right-dark" />
+                    </div>
                     {currentStateData && <LineChart currentStateData={currentStateData} />}
                 </div>
             </div>

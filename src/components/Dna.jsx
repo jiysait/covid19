@@ -1,3 +1,6 @@
+/**
+ * Author: Jongil Yoon
+ */
 import React, { useRef } from 'react'
 import { CubeCamera, LinearMipMapLinearFilter, RGBFormat, WebGLCubeRenderTarget } from 'three'
 import { useGLTF } from '@react-three/drei'
@@ -6,6 +9,11 @@ import { useFrame, useThree } from '@react-three/fiber'
 import DNA from '../models/dna_light.gltf'
 
 
+/**
+ * 
+ * @param {*} props 
+ * @returns 
+ */
 export default function Dna(props) {
 
   const group = useRef()
@@ -26,11 +34,17 @@ export default function Dna(props) {
   cubeCamera.position.set(0, 100, 0)
   scene.add(cubeCamera)
 
+  /**
+   * 
+   */
   useFrame(() => {
     cubeCamera.update(gl, scene)
     mesh.current.rotation.x += 0.01
   })
 
+  /**
+   * 
+   */
   return (
     <group ref={group} {...props} dispose={null}>
       {/* <mesh geometry={nodes.Cube001.geometry} material={materials.Material} scale={[0.04, 0.04, 0.04]} /> */}
@@ -45,6 +59,7 @@ export default function Dna(props) {
       </mesh>
     </group>
   )
+
 }
 
 useGLTF.preload(DNA)
